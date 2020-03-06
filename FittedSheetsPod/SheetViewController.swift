@@ -315,13 +315,13 @@ public class SheetViewController: UIViewController {
             self?.containerView.transform = CGAffineTransform(translationX: 0, y: self?.containerView.frame.height ?? 0)
             self?.view.backgroundColor = UIColor.clear
         }, completion: { [weak self] complete in
-            self?.dismiss(animated: false, completion: completion)
+            self?._dismiss(animated: false, completion: completion)
         })
     }
     
-    override public func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+    public func _dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         self.willDismiss?(self)
-        super.dismiss(animated: flag) {
+        self.dismiss(animated: flag) {
             self.didDismiss?(self)
             completion?()
         }
@@ -368,7 +368,7 @@ public class SheetViewController: UIViewController {
                     self?.containerView.transform = CGAffineTransform(translationX: 0, y: self?.containerView.frame.height ?? 0)
                     self?.view.backgroundColor = UIColor.clear
                 }, completion: { [weak self] complete in
-                    self?.dismiss(animated: false, completion: nil)
+                    self?._dismiss(animated: false, completion: nil)
                 })
                 return
             }
